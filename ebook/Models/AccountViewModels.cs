@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ebook.Models
@@ -62,8 +63,43 @@ namespace ebook.Models
         public bool RememberMe { get; set; }
     }
 
+    public enum IsAdminOrUser {
+        [Display(Name = "Admin")] 
+        Admin,
+        [Display(Name = "User")] 
+        User 
+    }
+
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "DOB")]
+        public DateTime Dob { get; set; }
+
+        [Required]
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+        [Required]
+        [Display(Name = "Contact Number")]
+        public string ContactNumber { get; set; }
+
+        [Required]
+        [Display(Name = "User Category")]
+        public IsAdminOrUser UserCategory { get; set; }
+
+        [Required]
+        [Display(Name = "User Id")]
+        public int UserId { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

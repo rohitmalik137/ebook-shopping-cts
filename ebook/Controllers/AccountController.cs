@@ -151,7 +151,17 @@ namespace ebook.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { 
+                    UserName = model.UserId.ToString(),
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Dob = model.Dob,
+                    Gender = model.Gender,
+                    ContactNumber = model.ContactNumber,
+                    UserCategory = model.UserCategory.ToString(),
+                    UserId = model.UserId
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
