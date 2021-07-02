@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ebook.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ebook.Controllers
 {
@@ -165,6 +166,19 @@ namespace ebook.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    if(user.UserCategory == IsAdminOrUser.Admin.ToString())
+                    {
+                        await roleManager.CreateAsync(new IdentityRole(RoleName.IsAdmin));
+                        await UserManager.AddToRoleAsync(user.Id, RoleName.IsAdmin);
+                    }
+                    else
+                    {
+                        await roleManager.CreateAsync(new IdentityRole(RoleName.IsUser));
+                        await UserManager.AddToRoleAsync(user.Id, RoleName.IsUser);
+                    }
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

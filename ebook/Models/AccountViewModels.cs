@@ -50,8 +50,7 @@ namespace ebook.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
+        [Display(Name = "User Id")]
         public string Email { get; set; }
 
         [Required]

@@ -181,10 +181,15 @@
     <Compile Include="Migrations\202107011821402_AddExtraFieldsForUserRegistration.Designer.cs">
       <DependentUpon>202107011821402_AddExtraFieldsForUserRegistration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107020657149_RoleName.cs" />
+    <Compile Include="Migrations\202107020657149_RoleName.Designer.cs">
+      <DependentUpon>202107020657149_RoleName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -267,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107011821402_AddExtraFieldsForUserRegistration.resx">
       <DependentUpon>202107011821402_AddExtraFieldsForUserRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107020657149_RoleName.resx">
+      <DependentUpon>202107020657149_RoleName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
