@@ -28,39 +28,76 @@ namespace ebook.Controllers
         [Authorize(Roles = RoleName.IsAdmin)]
         public ActionResult AddResources()
         {
-            ViewBag.Message = "Admin Add Resource Page.";
-
             return View();
+        }
+
+        [Authorize(Roles = RoleName.IsAdmin)]
+        public ActionResult EditResources(Book book)
+        {
+            return View("AddResources", book);
         }
 
         [HttpPost]
         [Authorize(Roles = RoleName.IsAdmin)]
         [ValidateAntiForgeryToken]
-        public ActionResult AddResources(Book book)
+        public ActionResult AddOrUpdateResources(Book book)
+        {
+            if(book.BookId != Guid.Empty)
+            {
+                homeRepository.UpdateBook(book);
+                homeRepository.Save();
+                return RedirectToAction("ViewResources");
+            }
+            else
+            {
+                try
+                {
+                    if (ModelState.IsValid)
+                    {
+                        homeRepository.InsertBook(book);
+                        homeRepository.Save();
+                        TempData["successMessage"] = "The Book Details are Added successfully";
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception e)
+                {
+                    // System.Diagnostics.Debug.WriteLine(e.InnerException.Message);
+                    ModelState.AddModelError(string.Empty, e.InnerException.Message);
+                }
+            }
+            return View("AddResources");
+        }
+
+        public ActionResult ViewResources()
+        {
+            IEnumerable<Book> books = homeRepository.GetBooks();
+            return View(books);
+        }
+
+        public ActionResult ViewSingleBook(Guid bookId)
+        {
+            if(bookId != null)
+            {
+                Book book = homeRepository.GetBookByID(bookId);
+                return View(book);
+            }
+            return RedirectToAction("ViewResources");
+        }
+
+        [Authorize(Roles = RoleName.IsAdmin)]
+        public ActionResult DeleteSingleBookRecord(Guid bookId)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    homeRepository.InsertBook(book);
-                    homeRepository.Save();
-                    TempData["successMessage"] = "The Book Details are Added successfully";
-                    return RedirectToAction("Index");
-                }
+                homeRepository.DeleteBook(bookId);
+                homeRepository.Save();
             }
-            catch (Exception e)
+            catch (DataException /* dex */)
             {
-                // System.Diagnostics.Debug.WriteLine(e.InnerException.Message);
-                ModelState.AddModelError(string.Empty, e.InnerException.Message);
+                return RedirectToAction("ViewSingleBook", bookId);
             }
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return RedirectToAction("ViewResources");
         }
     }
 }

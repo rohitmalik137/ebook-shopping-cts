@@ -7,9 +7,9 @@ namespace ebook.Repositories
     public interface IHomeRepository : IDisposable
     {
         IEnumerable<Book> GetBooks();
-        Book GetBookByID(int bookId);
+        Book GetBookByID(Guid bookId);
         void InsertBook(Book book);
-        void DeleteBook(int studentID);
+        void DeleteBook(Guid bookId);
         void UpdateBook(Book book);
         void Save();
     }

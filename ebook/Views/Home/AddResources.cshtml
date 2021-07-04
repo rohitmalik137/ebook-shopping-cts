@@ -3,10 +3,12 @@
 @{
     ViewBag.Title = "Add Book";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-@using (Html.BeginForm("AddResources", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@{ 
+    var addOrEdit = Model != null && Model.BookId != Guid.Empty ? "Edit Book" : "Add Book";
+}
+
+@using (Html.BeginForm("AddOrUpdateResources", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <h4>Add New Book.</h4>
@@ -66,9 +68,14 @@
             @Html.TextBoxFor(m => m.Discount, new { @class = "form-control" })
         </div>
     </div>
+    if(Model != null && Model.BookId != Guid.Empty)
+     {
+        @Html.HiddenFor(m => m.BookId)
+     }
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Add Book" />
+            <input type="submit" class="btn btn-default" value="@addOrEdit" />
         </div>
     </div>
 }

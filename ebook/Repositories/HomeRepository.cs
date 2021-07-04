@@ -20,7 +20,7 @@ namespace ebook.Repositories
             return context.Books.ToList();
         }
 
-        public Book GetBookByID(int id)
+        public Book GetBookByID(Guid id)
         {
             return context.Books.Find(id);
         }
@@ -30,7 +30,7 @@ namespace ebook.Repositories
             context.Books.Add(book);
         }
 
-        public void DeleteBook(int bookID)
+        public void DeleteBook(Guid bookID)
         {
             Book book = context.Books.Find(bookID);
             context.Books.Remove(book);

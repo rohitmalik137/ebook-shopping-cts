@@ -1,0 +1,77 @@
+﻿@model ebook.Models.Book
+
+@using ebook.Models;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Book Name: </th>
+                    <th scope="col">Book Code: </th>
+                    <th scope="col">Book Description: </th>
+                    <th scope="col">Book Author: </th>
+                    <th scope="col">Book Category: </th>
+                    <th scope="col">Book Type: </th>
+                    <th scope="col">Book Option: </th>
+                    <th scope="col">Book Rate: </th>
+                    <th scope="col">Book Discount: </th>
+                    @if (this.User.IsInRole(RoleName.IsAdmin))
+                    {
+                        <th scope="col">#</th>
+                        <th scope="col">#</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">@Model.BookName</td>
+                    <td>@Model.BookCode</td>
+                    <td>@Model.BookDescription</td>
+                    <td>@Model.Author</td>
+                    <td>@Model.Category</td>
+                    <td>@Model.Type</td>
+                    <td>@Model.Option</td>
+                    <td>@Model.Rate</td>
+                    <td>@Model.Discount</td>
+                    @if (this.User.IsInRole(RoleName.IsAdmin))
+                    {
+                        <td>
+                            @using (Html.BeginForm("EditResources", "Home"))
+                            {
+                                @Html.HiddenFor(x => x.BookId)
+                                @Html.HiddenFor(x => x.BookName)
+                                @Html.HiddenFor(x => x.BookCode)
+                                @Html.HiddenFor(x => x.BookDescription)
+                                @Html.HiddenFor(x => x.Author)
+                                @Html.HiddenFor(x => x.Category)
+                                @Html.HiddenFor(x => x.Type)
+                                @Html.HiddenFor(x => x.Option)
+                                @Html.HiddenFor(x => x.Rate)
+                                @Html.HiddenFor(x => x.Discount)
+                                <input type="submit" value="Edit" />
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("DeleteSingleBookRecord", "Home", new { bookId = Model.BookId }) ">
+                                Delete
+                            </a>
+                        </td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
