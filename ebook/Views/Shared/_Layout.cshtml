@@ -1,4 +1,7 @@
 ﻿<!DOCTYPE html>
+
+@using ebook.Models;
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -22,7 +25,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                   @if (this.User.IsInRole(RoleName.IsAdmin))
+                    {
+                      <li>@Html.ActionLink("Add Resources", "AddResources", "Home")</li>
+                    }
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")

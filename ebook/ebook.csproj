@@ -185,12 +185,19 @@
     <Compile Include="Migrations\202107020657149_RoleName.Designer.cs">
       <DependentUpon>202107020657149_RoleName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107040524380_AddBookModel3.cs" />
+    <Compile Include="Migrations\202107040524380_AddBookModel3.Designer.cs">
+      <DependentUpon>202107040524380_AddBookModel3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Book.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\HomeRepository.cs" />
+    <Compile Include="Repositories\IHomeRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -226,7 +233,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\AddResources.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -275,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107020657149_RoleName.resx">
       <DependentUpon>202107020657149_RoleName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107040524380_AddBookModel3.resx">
+      <DependentUpon>202107040524380_AddBookModel3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
