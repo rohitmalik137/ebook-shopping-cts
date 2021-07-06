@@ -20,6 +20,11 @@ namespace ebook.Repositories
             return context.Books.ToList();
         }
 
+        public IEnumerable<Book> GetBooksByCategory(int category)
+        {
+            return context.Books.Where(x => (int)x.Category == category).ToList();
+        }
+
         public Book GetBookByID(Guid id)
         {
             return context.Books.Find(id);

@@ -1,8 +1,19 @@
-﻿@model IList<ebook.Models.Book>
+﻿@model ebook.ViewModels.NewBookViewModel
 @{
     ViewBag.Title = "Available Book List";
 }
 <h2>@ViewBag.Title.</h2>
+
+List By Category:
+@using (Html.BeginForm("GetBooksListByCategory", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.EnumDropDownListFor(m => m.Category, new { @class = "form-control" })
+    <a href="@Url.Action("ViewResources", "Home")">
+        Reset
+    </a>
+    <input type="submit" class="btn btn-default" value="Filter" />
+}
 
 <table class="table">
     <thead>
@@ -10,6 +21,7 @@
             <th scope="col">#</th>
             <th scope="col">Book Name</th>
             <th scope="col">Book Author</th>
+            <th scope="col">Category</th>
             <th scope="col">Price</th>
             <th scope="col">Discount</th>
             <th scope="col">#</th>
@@ -17,12 +29,13 @@
     </thead>
     <tbody>
         @{ var i = 1; }
-        @foreach (var item in Model)
+        @foreach (var item in Model.BookList)
         {
-             <tr>
+            <tr>
                 <th scope="row">@i</th>
                 <td>@item.BookName</td>
                 <td>@item.Author</td>
+                <td>@item.Category</td>
                 <td>@item.Rate</td>
                 <td>@item.Discount</td>
                 <td>
@@ -30,7 +43,7 @@
                         View Book
                     </a>
                 </td>
-             </tr>
+            </tr>
             { i++; }
         }
     </tbody>

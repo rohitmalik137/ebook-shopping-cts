@@ -199,6 +199,7 @@
     <Compile Include="Repositories\HomeRepository.cs" />
     <Compile Include="Repositories\IHomeRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\NewBookViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -222,7 +223,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="ViewResource.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
