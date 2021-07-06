@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ebook.Models;
 using ebook.Repositories;
+using ebook.ViewModels;
 
 namespace ebook.Controllers
 {
@@ -72,7 +73,22 @@ namespace ebook.Controllers
         public ActionResult ViewResources()
         {
             IEnumerable<Book> books = homeRepository.GetBooks();
-            return View(books);
+            var viewModel = new NewBookViewModel
+            {
+                BookList = books
+            };
+            return View(viewModel);
+        }
+
+        [ValidateAntiForgeryToken]
+        public ActionResult GetBooksListByCategory(int category)
+        {
+            IEnumerable<Book> bookByCategory = homeRepository.GetBooksByCategory(category);
+            var viewModel = new NewBookViewModel
+            {
+                BookList = bookByCategory
+            };
+            return View("ViewResources", viewModel);
         }
 
         public ActionResult ViewSingleBook(Guid bookId)
