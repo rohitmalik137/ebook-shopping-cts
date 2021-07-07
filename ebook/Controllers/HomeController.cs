@@ -91,6 +91,28 @@ namespace ebook.Controllers
             return View("ViewResources", viewModel);
         }
 
+        [HttpGet]
+        public ActionResult SimpleSearch(string search)
+        {
+            IEnumerable<Book> bookListBySimpleSearch = homeRepository.GetBooksByBasicSearch(search);
+            var viewModel = new NewBookViewModel
+            {
+                BookList = bookListBySimpleSearch
+            };
+            return View("ViewResources", viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult AdvancedSearch(string bookName, string authorName, int Category)
+        {
+            IEnumerable<Book> bookListBySimpleSearch = homeRepository.GetBooksByAdvancedSearch(bookName, authorName, Category);
+            var viewModel = new NewBookViewModel
+            {
+                BookList = bookListBySimpleSearch
+            };
+            return View("ViewResources", viewModel);
+        }
+
         public ActionResult ViewSingleBook(Guid bookId)
         {
             if(bookId != null)

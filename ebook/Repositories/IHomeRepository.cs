@@ -9,6 +9,10 @@ namespace ebook.Repositories
         IEnumerable<Book> GetBooks();
 
         IEnumerable<Book> GetBooksByCategory(int category);
+
+        IEnumerable<Book> GetBooksByBasicSearch(string search);
+
+        IEnumerable<Book> GetBooksByAdvancedSearch(string bookName, string authorName, int Category);
         Book GetBookByID(Guid bookId);
         void InsertBook(Book book);
         void DeleteBook(Guid bookId);
